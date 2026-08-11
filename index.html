@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Santhosh Syam Prasad — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0B0F2E;
+    --bg-deep-2:#12173f;
+    --violet:#6C5CE7;
+    --blue:#4C9EFF;
+    --text-main:#EEF0FF;
+    --text-dim:#9BA3C7;
+    --glass-fill:rgba(255,255,255,0.06);
+    --glass-fill-strong:rgba(255,255,255,0.10);
+    --glass-border:rgba(255,255,255,0.14);
+    --glass-border-bright:rgba(255,255,255,0.28);
+    --radius:18px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:var(--font-body);
+    color:var(--text-main);
+    background:
+      radial-gradient(circle at 15% 10%, rgba(108,92,231,0.35), transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(76,158,255,0.28), transparent 50%),
+      radial-gradient(circle at 50% 90%, rgba(108,92,231,0.22), transparent 55%),
+      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-deep-2) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+  a{color:inherit; text-decoration:none;}
+
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    background:rgba(11,15,46,0.55);
+    border-bottom:1px solid var(--glass-border);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:18px; padding-bottom:18px;
+  }
+  .logo{ font-family:var(--font-mono); font-size:15px; letter-spacing:0.5px; color:var(--text-main); }
+  .logo span{color:var(--blue);}
+  .navlinks{display:flex; gap:28px; font-size:14px; color:var(--text-dim);}
+  .navlinks a{transition:color 0.2s ease;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--text-main); outline:none;}
+
+  .glass{
+    background:var(--glass-fill);
+    border:1px solid var(--glass-border);
+    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    border-radius:var(--radius);
+    box-shadow:0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .hero{
+    padding:96px 0 80px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px; height:8px; border-radius:50%;
+    background:var(--blue);
+    box-shadow:0 0 12px var(--blue);
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.06;
+    letter-spacing:-0.5px;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(100deg, var(--blue), var(--violet));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    font-size:17px;
+    color:var(--text-dim);
+    max-width:520px;
+    line-height:1.65;
+    margin-bottom:32px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:14.5px;
+    padding:13px 26px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg, var(--violet), var(--blue));
+    color:#fff;
+    border:none;
+    box-shadow:0 8px 24px rgba(108,92,231,0.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(108,92,231,0.5);}
+  .btn-ghost{
+    background:var(--glass-fill);
+    border:1px solid var(--glass-border);
+    color:var(--text-main);
+  }
+  .btn-ghost:hover{background:var(--glass-fill-strong); border-color:var(--glass-border-bright); transform:translateY(-2px);}
+
+  .terminal{ padding:0; overflow:hidden; }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:14px 18px;
+    border-bottom:1px solid var(--glass-border);
+    background:rgba(255,255,255,0.03);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#FF6B6B;} .dot.y{background:#FFD166;} .dot.g{background:#5CE68F;}
+  .terminal-title{ margin-left:6px; font-family:var(--font-mono); font-size:12px; color:var(--text-dim); }
+  .terminal-body{
+    padding:22px 24px 26px;
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    line-height:1.9;
+    color:var(--text-dim);
+  }
+  .terminal-body .prompt{color:var(--blue);}
+  .terminal-body .cmd{color:var(--text-main);}
+  .terminal-body .key{color:var(--violet);}
+  .terminal-body .val{color:var(--text-main);}
+  .terminal-photo{ display:flex; justify-content:center; margin:6px 0 18px; }
+  .terminal-photo img{
+    width:96px; height:96px; border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--glass-border-bright);
+    box-shadow:0 0 0 6px rgba(108,92,231,0.12);
+  }
+  .cursor{
+    display:inline-block; width:7px; height:14px; background:var(--blue);
+    margin-left:4px; vertical-align:middle;
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  section{padding:70px 0;}
+  .section-head{margin-bottom:40px;}
+  .section-num{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--violet);
+    letter-spacing:1.5px;
+    margin-bottom:10px;
+  }
+  h2.section-title{
+    font-family:var(--font-display);
+    font-size:clamp(26px, 3.4vw, 36px);
+    font-weight:600;
+    letter-spacing:-0.3px;
+  }
+
+  .about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:32px; align-items:stretch; }
+  .about-card{padding:32px;}
+  .about-card p{color:var(--text-dim); line-height:1.75; font-size:15.5px; margin-bottom:14px;}
+  .about-card p:last-child{margin-bottom:0;}
+  .about-facts{ padding:28px; display:flex; flex-direction:column; gap:18px; justify-content:center; }
+  .fact{display:flex; flex-direction:column; gap:4px;}
+  .fact .label{font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); letter-spacing:1px; text-transform:uppercase;}
+  .fact .value{font-size:15px; font-weight:500;}
+
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:16px; }
+  .skill-card{
+    padding:22px 20px;
+    display:flex; flex-direction:column; gap:10px;
+    transition:transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .skill-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--glass-border-bright);
+    background:var(--glass-fill-strong);
+  }
+  .skill-tag{ font-family:var(--font-mono); font-size:12px; color:var(--blue); letter-spacing:1px; }
+  .skill-name{font-family:var(--font-display); font-size:18px; font-weight:600;}
+  .skill-bar{ height:4px; border-radius:2px; background:rgba(255,255,255,0.08); overflow:hidden; margin-top:4px; }
+  .skill-bar-fill{height:100%; background:linear-gradient(90deg, var(--violet), var(--blue)); border-radius:2px;}
+
+  .project-card{
+    padding:30px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+    align-items:start;
+  }
+  .project-card + .project-card{margin-top:20px;}
+  .project-title{font-family:var(--font-display); font-size:21px; font-weight:600; margin-bottom:10px;}
+  .project-desc{color:var(--text-dim); font-size:14.5px; line-height:1.7; margin-bottom:16px; max-width:560px;}
+  .project-stack{display:flex; gap:8px; flex-wrap:wrap;}
+  .pill{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    padding:5px 11px;
+    border-radius:999px;
+    border:1px solid var(--glass-border);
+    color:var(--text-dim);
+    background:rgba(255,255,255,0.03);
+  }
+  .project-links{display:flex; flex-direction:column; gap:10px; align-items:flex-end;}
+  .project-links a{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--blue);
+    white-space:nowrap;
+    display:flex; align-items:center; gap:6px;
+    transition:color 0.2s ease;
+  }
+  .project-links a:hover{color:var(--text-main);}
+
+  .status-card{ padding:32px; display:flex; align-items:center; gap:20px; }
+  .status-dot{
+    width:14px; height:14px; border-radius:50%;
+    background:var(--blue);
+    box-shadow:0 0 0 6px rgba(76,158,255,0.15);
+    flex-shrink:0;
+  }
+  .status-text .status-title{font-family:var(--font-display); font-size:19px; font-weight:600; margin-bottom:6px;}
+  .status-text p{color:var(--text-dim); font-size:14.5px; line-height:1.6;}
+
+  .contact-card{
+    padding:44px;
+    text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:18px;
+  }
+  .contact-card h2{
+    font-family:var(--font-display);
+    font-size:clamp(24px, 3.2vw, 34px);
+    font-weight:600;
+  }
+  .contact-card p{color:var(--text-dim); max-width:460px; line-height:1.6;}
+  .contact-links{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px;}
+
+  footer{
+    padding:28px 0 40px;
+    text-align:center;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-dim);
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--blue);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .cursor{animation:none;}
+    .btn, .skill-card{transition:none;}
+  }
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr; padding-top:64px;}
+    .about-grid{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+    .project-card{grid-template-columns:1fr;}
+    .project-links{align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">santhosh<span>.dev</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div>
+      <div class="eyebrow">Available for developer roles</div>
+      <h1>Building things from<br><span class="accent">first principles.</span></h1>
+      <p class="lead">I'm Santhosh Syam Prasad, a developer who likes understanding how software actually works — from data structures up to the interfaces people touch. Currently sharpening my craft one project at a time.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="terminal glass">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="terminal-title">whoami.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-photo">
+          <!-- Replace this src with your own photo (file path or base64) -->
+          <img src="your-photo.jpg" alt="Portrait of Santhosh Syam Prasad" />
+        </div>
+        <div><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+        <div><span class="key">name</span>&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="val">Santhosh Syam Prasad</span></div>
+        <div><span class="key">role</span>&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="val">Developer</span></div>
+        <div><span class="key">stack</span>&nbsp;&nbsp;&nbsp;→ <span class="val">C · Python · JS</span></div>
+        <div><span class="key">status</span>&nbsp;&nbsp;→ <span class="val">Open to work</span><span class="cursor"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <div class="section-num">01 / About</div>
+      <h2 class="section-title">A little about me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-card glass">
+        <p>I'm a developer with a strong foundation in computer science fundamentals — from core programming and data structures to algorithm design and analysis. I enjoy breaking problems down to their logic before writing a single line of code.</p>
+        <p>Alongside the fundamentals, I build for the web with HTML, CSS, and JavaScript, and I'm actively looking for opportunities to apply what I've learned to real, production-facing projects.</p>
+      </div>
+      <div class="about-facts glass">
+        <div class="fact">
+          <span class="label">Focus</span>
+          <span class="value">Frontend development &amp; core CS fundamentals</span>
+        </div>
+        <div class="fact">
+          <span class="label">Currently</span>
+          <span class="value">Building projects, sharpening DSA</span>
+        </div>
+        <div class="fact">
+          <span class="label">Looking for</span>
+          <span class="value">Entry-level developer opportunities</span>
+        </div>
+        <div class="fact">
+          <span class="label">Based in</span>
+          <span class="value">India</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <div class="section-num">02 / Skills</div>
+      <h2 class="section-title">What I work with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card glass">
+        <span class="skill-tag">LANG</span>
+        <span class="skill-name">C</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card glass">
+        <span class="skill-tag">LANG</span>
+        <span class="skill-name">Python</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div>
+      </div>
+      <div class="skill-card glass">
+        <span class="skill-tag">CORE</span>
+        <span class="skill-name">DSA</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div>
+      </div>
+      <div class="skill-card glass">
+        <span class="skill-tag">CORE</span>
+        <span class="skill-name">DAA</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card glass">
+        <span class="skill-tag">WEB</span>
+        <span class="skill-name">HTML</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card glass">
+        <span class="skill-tag">WEB</span>
+        <span class="skill-name">CSS</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div>
+      </div>
+      <div class="skill-card glass">
+        <span class="skill-tag">WEB</span>
+        <span class="skill-name">JavaScript</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:76%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="wrap">
+    <div class="section-head">
+      <div class="section-num">03 / Projects</div>
+      <h2 class="section-title">Things I've built</h2>
+    </div>
+
+    <div class="project-card glass">
+      <div>
+        <div class="project-title">Mantra Hotel Assignment</div>
+        <div class="project-desc">A frontend hotel website design assignment built for the MANTRA 2026 Summer School — focused on translating a hotel brand into a clean, responsive interface.</div>
+        <div class="project-stack">
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/santhoshterli6-star/mantra-hotel-assignment" target="_blank" rel="noopener">↗ GitHub repo</a>
+        <a href="https://neon-bunny-c51470.netlify.app" target="_blank" rel="noopener">↗ Live site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="wrap">
+    <div class="section-head">
+      <div class="section-num">04 / Experience</div>
+      <h2 class="section-title">Where I'm at</h2>
+    </div>
+    <div class="status-card glass">
+      <div class="status-dot"></div>
+      <div class="status-text">
+        <div class="status-title">Fresher — actively seeking my first developer role</div>
+        <p>I haven't worked professionally yet, but I've spent my time building a solid base in programming fundamentals and shipping small projects like the one above. Looking for a team where I can learn fast and contribute early.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap">
+    <div class="contact-card glass">
+      <div class="section-num">05 / Contact</div>
+      <h2>Let's talk</h2>
+      <p>I'm currently open to entry-level developer roles and internships. Reach out — I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a href="mailto:santhosh.terli6@gmail.com" class="btn btn-primary">✉ santhosh.terli6@gmail.com</a>
+        <a href="tel:+919281198986" class="btn btn-ghost">📞 +91 92811 98986</a>
+        <a href="https://github.com/santhoshterli6-star" target="_blank" rel="noopener" class="btn btn-ghost">↗ GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  designed &amp; built with care — © 2026 Santhosh Syam Prasad
+</footer>
+
+</body>
+</html>
